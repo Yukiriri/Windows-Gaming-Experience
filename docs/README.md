@@ -1,6 +1,5 @@
-
 # Windows-Gaming-Experience
-一份对Windows游戏CPU的性能、丝滑度、跟手等因素的研究心得  
+一份对Windows游戏的CPU性能、丝滑度、跟手等因素的研究心得  
 我从2021年就开始日积月累研究，浅到系统表层操作，深到上手游戏引擎开project，已经能总结一些明显成效  
 我归纳的步骤已经提纯精华，省略了过多的收益不大的操作  
 按下面的一整套流程走一遍就好，Intel和AMD通用，台式和笔记本也通用  
@@ -67,7 +66,7 @@ bcdedit /set disabledynamictick yes
     reg add "HKLM\SYSTEM\CurrentControlSet\Control\Power\PowerSettings\54533251-82be-4824-96c1-47b60b740d00\c4581c31-89ab-4597-8e2b-9c9cab440e6b" /v "Attributes" /t REG_DWORD /d 2 /f
     powercfg -setacvalueindex SCHEME_CURRENT SUB_PROCESSOR "c4581c31-89ab-4597-8e2b-9c9cab440e6b" 30
     ```
-- 修改生效
+- 让修改生效
     ```
     powercfg -setactive SCHEME_CURRENT
     ```
@@ -99,7 +98,7 @@ cmd命令：
     reg add "HKEY_CURRENT_USER\Control Panel\Mouse" /v "MouseThreshold2" /t REG_SZ /d "10" /f
     ```
 
-## 修改前后台调度优先级
+## 修改前后台调度运作
 这是一项细微影响鼠标手感的参数，推荐FPS选手  
   
 `Win32PrioritySeparation`二进制位解释
