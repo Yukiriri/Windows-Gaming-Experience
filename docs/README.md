@@ -2,12 +2,12 @@
 # Game-CPU-Experience
 一份对Windows游戏CPU的性能、丝滑度、跟手等因素的研究心得  
 我从2021年就开始日积月累研究，浅到系统表层操作，深到上手游戏引擎开project，已经能总结一些明显成效  
-我归纳的步骤已经提纯精华，省略了过多的收益微乎其微的操作  
+我归纳的步骤已经提纯精华，省略了过多的收益不大的操作  
 按下面的一整套流程走一遍就好，Intel和AMD通用，台式和笔记本也通用  
 如果想贡献更丰富的调优，欢迎  
 
 ## 系统版本
-尽可能上最新的Win11 24H2，并且至少26100.3775  
+尽可能上最新的`Win11 24H2`，并且至少`26100.3775`  
 当然了，条件不允许就不强求了  
 
 ## 系统设置选项
@@ -34,6 +34,7 @@ bcdedit /set disabledynamictick yes
 上面的效果是恢复默认TSC，阻止使用RTC  
 虽然使用RTC可以提高一些帧数上限，但是会大幅增加CPU占用，还会严重破坏所有游戏的骨骼动画的连贯度  
 有人说AMD骨骼动画卡顿是因为`Clock Stretching`的原因，但我的实验证明，罪魁祸首单纯是RTC  
+如果你要用8000HZ的鼠标，强烈建议阻止RTC  
 
 > [!IMPORTANT]
 > 需要重启生效  
@@ -156,4 +157,4 @@ nvidia-smi -lmc 800,-1
 [gaming-laptop-temperature.md](./gaming-laptop-temperature.md)
 
 # Credits
-https://sites.google.com/view/melodystweaks/misconceptions-about-timers-hpet-tsc-pmt
+- https://sites.google.com/view/melodystweaks/misconceptions-about-timers-hpet-tsc-pmt
