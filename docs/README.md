@@ -49,21 +49,29 @@ bcdedit /set disabledynamictick yes
 - 生效的异类策略
     ```
     reg add "HKLM\SYSTEM\CurrentControlSet\Control\Power\PowerSettings\54533251-82be-4824-96c1-47b60b740d00\7f2f5cfa-f10c-4823-b5e1-e93ae85f46b5" /v "Attributes" /t REG_DWORD /d 2 /f
+    ```
+    ```
     powercfg -setacvalueindex SCHEME_CURRENT SUB_PROCESSOR "7f2f5cfa-f10c-4823-b5e1-e93ae85f46b5" 4
     ```
 - 异类线程调度策略
     ```
     reg add "HKLM\SYSTEM\CurrentControlSet\Control\Power\PowerSettings\54533251-82be-4824-96c1-47b60b740d00\93b8b6dc-0698-4d1c-9ee4-0644e900c85d" /v "Attributes" /t REG_DWORD /d 2 /f
+    ```
+    ```
     powercfg -setacvalueindex SCHEME_CURRENT SUB_PROCESSOR "93b8b6dc-0698-4d1c-9ee4-0644e900c85d" 0
     ```
 - 异类短运行线程调度策略
     ```
     reg add "HKLM\SYSTEM\CurrentControlSet\Control\Power\PowerSettings\54533251-82be-4824-96c1-47b60b740d00\bae08b81-2d5e-4688-ad6a-13243356654b" /v "Attributes" /t REG_DWORD /d 2 /f
+    ```
+    ```
     powercfg -setacvalueindex SCHEME_CURRENT SUB_PROCESSOR "bae08b81-2d5e-4688-ad6a-13243356654b" 0
     ```
 - （可选）处理器闲置时间检查
     ```
     reg add "HKLM\SYSTEM\CurrentControlSet\Control\Power\PowerSettings\54533251-82be-4824-96c1-47b60b740d00\c4581c31-89ab-4597-8e2b-9c9cab440e6b" /v "Attributes" /t REG_DWORD /d 2 /f
+    ```
+    ```
     powercfg -setacvalueindex SCHEME_CURRENT SUB_PROCESSOR "c4581c31-89ab-4597-8e2b-9c9cab440e6b" 30
     ```
 - 让修改生效
@@ -75,9 +83,9 @@ bcdedit /set disabledynamictick yes
 > 顺便提一下我的调度修改程序：[`ReimagedScheduling`](https://github.com/Yukiriri/ReimaginedScheduling)
 
 ## 关闭鼠标增强指针精度
-这是一项高度影响鼠标手感的参数，推荐FPS选手  
+这是一项大幅影响鼠标手感的参数，推荐FPS选手  
 cmd命令：
-- 关闭
+- 关闭增强指针精度
     ```
     reg add "HKEY_CURRENT_USER\Control Panel\Mouse" /v "MouseSpeed" /t REG_SZ /d "0" /f
     ```
@@ -147,7 +155,7 @@ nvidia-smi -lmc 800,-1
 > 这个修改仅够维持本次开机，如果要永久生效，需要加入开机自启  
 
 ## 关于AMD BIOS老生常谈的选项
-现在已经没必要动了，全Auto也没问题的！！
+`PSS Support`、`CPPC PC`、`Global C State`现在已经没必要动了，全Auto也没问题的！！
 
 ## 以上操作懒人化
 想要全自动操作上面的步骤吧，我知道，但先咕一会儿
