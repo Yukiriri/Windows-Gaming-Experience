@@ -39,7 +39,8 @@ bcdedit /set disabledynamictick yes
 > 需要重启生效  
 
 > [!NOTE]
-> 运行一次即整个系统永久保持，除非撤销了这些BCD选项，或者使用了新系统  
+> 运行一次即整个系统永久保持，不需要加入开机自启  
+> 除非撤销了这些BCD选项，或者使用了新系统  
 
 ## 电源计划
 老生常谈的Windows大小核调度  
@@ -79,6 +80,10 @@ bcdedit /set disabledynamictick yes
     powercfg -setactive SCHEME_CURRENT
     ```
 
+> [!NOTE]
+> 运行一次即整个电源计划生效，不需要加入开机自启  
+> 除非切换电源计划，才需要给新电源计划重新运行一次  
+
 > [!TIP]
 > 顺便提一下我的调度修改程序：[`ReimagedScheduling`](https://github.com/Yukiriri/ReimaginedScheduling)
 
@@ -95,7 +100,7 @@ cmd命令：
     ```
     reg add "HKEY_CURRENT_USER\Control Panel\Mouse" /v "MouseThreshold2" /t REG_SZ /d "0" /f
     ```
-- 如果要恢复默认
+- 恢复系统默认
     ```
     reg add "HKEY_CURRENT_USER\Control Panel\Mouse" /v "MouseSpeed" /t REG_SZ /d "1" /f
     ```
@@ -105,6 +110,10 @@ cmd命令：
     ```
     reg add "HKEY_CURRENT_USER\Control Panel\Mouse" /v "MouseThreshold2" /t REG_SZ /d "10" /f
     ```
+
+> [!NOTE]
+> 运行一次即整个系统永久保持，不需要加入开机自启  
+> 除非恢复默认，或者使用了新系统  
 
 ## 修改前后台调度运作
 这是一项细微影响鼠标手感的参数，推荐FPS选手  
@@ -134,10 +143,14 @@ cmd命令：
     ```
     reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\PriorityControl" /v "Win32PrioritySeparation" /t REG_DWORD /d 16 /f
     ```
-- 恢复默认
+- 恢复系统默认
     ```
     reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\PriorityControl" /v "Win32PrioritySeparation" /t REG_DWORD /d 2 /f
     ```
+
+> [!NOTE]
+> 运行一次即整个系统永久保持，不需要加入开机自启  
+> 除非恢复默认，或者使用了新系统  
 
 ## 缓解系统动画掉帧
 NVIDIA RTX30+开始，存在低负载时系统动画掉帧  
@@ -154,6 +167,7 @@ nvidia-smi -lmc 800,-1
 
 > [!NOTE]
 > 这个修改仅够维持本次开机，如果要永久生效，需要加入开机自启  
+> 严格来说只维持本次驱动会话，驱动状态更改后就被重置  
 
 ## 关于AMD BIOS老生常谈的选项
 `PSS Support`、`CPPC PC`、`Global C State`现在已经没必要动了，全Auto也没问题的！！
