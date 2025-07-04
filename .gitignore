@@ -1,6 +1,7 @@
-.idea/**
+/.idea/**
 
-bin/**
-obj/**
-dev/**
-*.bat
+/bin/**
+/obj/**
+/dev/**
+
+/*.bat
