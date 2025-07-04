@@ -1,4 +1,4 @@
 # Auto detect text files and perform LF normalization
 * text=auto
-*bat text eol=crlf
-*reg text eol=crlf
+tools/*bat  text eol=crlf
+tools/*reg  text eol=crlf
