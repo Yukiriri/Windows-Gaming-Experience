@@ -33,7 +33,7 @@ bcdedit /set disabledynamictick yes
 上面的效果是恢复默认TSC，阻止使用RTC  
 虽然使用RTC可以提高一些帧数上限，但是会大幅增加CPU占用，还会严重破坏所有游戏的骨骼动画的连贯度  
 有人说AMD骨骼动画卡顿是因为`Clock Stretching`的原因，但我的实验证明，罪魁祸首单纯是RTC  
-如果你要用8000HZ的鼠标，强烈建议阻止RTC  
+如果你要用超过1000HZ的鼠标，强烈建议阻止RTC  
 
 > [!IMPORTANT]
 > 需要重启生效  
