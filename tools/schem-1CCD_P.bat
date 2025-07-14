@@ -11,5 +11,3 @@ reg add "HKLM\SYSTEM\CurrentControlSet\Control\Power\PowerSettings\54533251-82be
 powercfg -setacvalueindex SCHEME_CURRENT SUB_PROCESSOR "c4581c31-89ab-4597-8e2b-9c9cab440e6b" 30
 
 powercfg -setactive SCHEME_CURRENT
-
-pause
