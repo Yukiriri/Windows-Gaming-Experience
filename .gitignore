@@ -1,7 +1,4 @@
-/.idea/**
-
 /bin/**
 /obj/**
-/dev/**
-
+/src/.idea/**
 /*.bat
