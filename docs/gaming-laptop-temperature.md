@@ -17,13 +17,21 @@
 - 设置离电CPU频率上限
     ```
     powercfg -setdcvalueindex SCHEME_CURRENT SUB_PROCESSOR "75b0ae3f-bce0-45a7-8c89-c9611c25e100" 3000
+    ```
+    ```
     powercfg -setdcvalueindex SCHEME_CURRENT SUB_PROCESSOR "75b0ae3f-bce0-45a7-8c89-c9611c25e101" 3000
+    ```
+    ```
     powercfg -setdcvalueindex SCHEME_CURRENT SUB_PROCESSOR "75b0ae3f-bce0-45a7-8c89-c9611c25e102" 3000
     ```
 - 设置插电CPU频率上限
     ```
     powercfg -setacvalueindex SCHEME_CURRENT SUB_PROCESSOR "75b0ae3f-bce0-45a7-8c89-c9611c25e100" 3000
+    ```
+    ```
     powercfg -setacvalueindex SCHEME_CURRENT SUB_PROCESSOR "75b0ae3f-bce0-45a7-8c89-c9611c25e101" 3000
+    ```
+    ```
     powercfg -setacvalueindex SCHEME_CURRENT SUB_PROCESSOR "75b0ae3f-bce0-45a7-8c89-c9611c25e102" 3000
     ```
 其中，`3000`代表最高上限，单位为`MHZ`  
