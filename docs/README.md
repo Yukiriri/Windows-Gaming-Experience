@@ -175,8 +175,5 @@ nvidia-smi -lmc 800,-1
 ## 以上操作懒人化
 想要全自动操作上面的步骤吧，我知道，但先咕一会儿
 
-# 游戏本温度压制方案
-[gaming-laptop-temperature.md](./gaming-laptop-temperature.md)
-
 # Credits
 - https://sites.google.com/view/melodystweaks/misconceptions-about-timers-hpet-tsc-pmt
