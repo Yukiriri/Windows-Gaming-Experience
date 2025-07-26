@@ -20,20 +20,21 @@
 - `网卡驱动`不要太老就好  
 
 ## 修复系统Tick
-管理员运行以下几行cmd命令
-```
-bcdedit /deletevalue useplatformclock >nul
-```
-```
-bcdedit /set useplatformtick no
-```
-```
-bcdedit /set disabledynamictick yes
-```
-上面的效果是恢复默认TSC，阻止使用RTC  
-虽然使用RTC可以提高一些帧数上限，但是会大幅增加CPU占用，还会严重破坏所有游戏的骨骼动画的连贯度  
+大部分程序在使用微秒单位的等待事件的时候，Windows默认会使用RTC  
+RTC的CPU开销非常大，如果因此瓶颈，就会破坏游戏的Tick精准性  
 有人说AMD骨骼动画卡顿是因为`Clock Stretching`的原因，但我的实验证明，罪魁祸首单纯是RTC  
 如果你要用超过1000HZ的鼠标，强烈建议阻止RTC  
+  
+管理员运行下面的cmd命令，作用是恢复默认TSC，阻止使用RTC
+```
+bcdedit /DeleteValue UsePlatformClock >nul
+```
+```
+bcdedit /Set UsePlatformTick No
+```
+```
+bcdedit /Set DisableDynamicTick Yes
+```
 
 > [!IMPORTANT]
 > 需要重启生效  
@@ -44,40 +45,24 @@ bcdedit /set disabledynamictick yes
 
 ## 电源计划
 老生常谈的Windows大小核调度  
+无论在23H2以前还是24H2以后，不同型号的全大核以及单CCD的CPU仍然可能会出现完全不同的线程调度，太怪了  
   
-关于这个，无论在23H2以前还是24H2以后，不同型号的全大核以及单CCD的CPU仍然可能会出现完全不同的线程调度，好怪哦  
 如果仍然有全大核调度问题需要解决，可以管理员运行下面的cmd命令  
 - 生效的异类策略
     ```
-    reg add "HKLM\SYSTEM\CurrentControlSet\Control\Power\PowerSettings\54533251-82be-4824-96c1-47b60b740d00\7f2f5cfa-f10c-4823-b5e1-e93ae85f46b5" /v "Attributes" /t REG_DWORD /d 2 /f
-    ```
-    ```
-    powercfg -setacvalueindex SCHEME_CURRENT SUB_PROCESSOR "7f2f5cfa-f10c-4823-b5e1-e93ae85f46b5" 4
+    powercfg -SetAcValueIndex SCHEME_CURRENT SUB_PROCESSOR "7f2f5cfa-f10c-4823-b5e1-e93ae85f46b5" 4
     ```
 - 异类线程调度策略
     ```
-    reg add "HKLM\SYSTEM\CurrentControlSet\Control\Power\PowerSettings\54533251-82be-4824-96c1-47b60b740d00\93b8b6dc-0698-4d1c-9ee4-0644e900c85d" /v "Attributes" /t REG_DWORD /d 2 /f
-    ```
-    ```
-    powercfg -setacvalueindex SCHEME_CURRENT SUB_PROCESSOR "93b8b6dc-0698-4d1c-9ee4-0644e900c85d" 0
+    powercfg -SetAcValueIndex SCHEME_CURRENT SUB_PROCESSOR "93b8b6dc-0698-4d1c-9ee4-0644e900c85d" 0
     ```
 - 异类短运行线程调度策略
     ```
-    reg add "HKLM\SYSTEM\CurrentControlSet\Control\Power\PowerSettings\54533251-82be-4824-96c1-47b60b740d00\bae08b81-2d5e-4688-ad6a-13243356654b" /v "Attributes" /t REG_DWORD /d 2 /f
-    ```
-    ```
-    powercfg -setacvalueindex SCHEME_CURRENT SUB_PROCESSOR "bae08b81-2d5e-4688-ad6a-13243356654b" 0
-    ```
-- （可选）处理器闲置时间检查
-    ```
-    reg add "HKLM\SYSTEM\CurrentControlSet\Control\Power\PowerSettings\54533251-82be-4824-96c1-47b60b740d00\c4581c31-89ab-4597-8e2b-9c9cab440e6b" /v "Attributes" /t REG_DWORD /d 2 /f
-    ```
-    ```
-    powercfg -setacvalueindex SCHEME_CURRENT SUB_PROCESSOR "c4581c31-89ab-4597-8e2b-9c9cab440e6b" 30
+    powercfg -SetAcValueIndex SCHEME_CURRENT SUB_PROCESSOR "bae08b81-2d5e-4688-ad6a-13243356654b" 0
     ```
 - 让修改生效
     ```
-    powercfg -setactive SCHEME_CURRENT
+    powercfg -SetActive SCHEME_CURRENT
     ```
 
 > [!NOTE]
@@ -154,7 +139,7 @@ cmd命令：
 
 ## 缓解系统动画掉帧
 NVIDIA RTX30+开始，存在低负载时系统动画掉帧  
-以下cmd命令可以大幅缓解掉帧  
+运行这条cmd命令可以大幅缓解掉帧  
 ```
 nvidia-smi -lmc 800,-1
 ```

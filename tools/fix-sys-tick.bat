@@ -1,3 +1,3 @@
-bcdedit /deletevalue useplatformclock >nul
-bcdedit /set useplatformtick no
-bcdedit /set disabledynamictick yes
+bcdedit /DeleteValue UsePlatformClock >nul
+bcdedit /Set UsePlatformTick No
+bcdedit /Set DisableDynamicTick Yes
