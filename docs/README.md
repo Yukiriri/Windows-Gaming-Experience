@@ -8,6 +8,13 @@
 > [!IMPORTANT]
 > 全文提到的cmd命令都需要管理员身份运行  
 
+> [!TIP]
+> 修改电源计划之前，推荐把电源计划重置默认  
+> 也推荐使用默认的平衡计划  
+
+> [!NOTE]
+> 仓库的tools文件夹里有写好的脚本版  
+
 ## 系统版本
 尽可能上最新的`Win11 24H2`，并且至少`26100.4188`  
 当然了，条件不允许就不强求了  
@@ -49,20 +56,12 @@ cmd命令一览：
 > 运行一次即整个系统永久保持，不需要加入开机自启  
 > 除非撤销了这些BCD选项，或者使用了新系统  
 
-## 电源计划
+## 全大核调度
 老生常谈的Windows大小核调度  
 无论在23H2以前还是24H2以后，不同型号的全大核以及单CCD的CPU仍然可能会出现完全不同的线程调度，太怪了  
 如果仍然有全大核调度问题需要解决，可以运行下面的cmd命令  
   
 cmd命令一览：
-- 生效的异类策略
-    ```
-    powercfg -SetAcValueIndex SCHEME_CURRENT SUB_PROCESSOR "7f2f5cfa-f10c-4823-b5e1-e93ae85f46b5" 4
-    ```
-- 异类线程调度策略
-    ```
-    powercfg -SetAcValueIndex SCHEME_CURRENT SUB_PROCESSOR "93b8b6dc-0698-4d1c-9ee4-0644e900c85d" 0
-    ```
 - 异类短运行线程调度策略
     ```
     powercfg -SetAcValueIndex SCHEME_CURRENT SUB_PROCESSOR "bae08b81-2d5e-4688-ad6a-13243356654b" 0
@@ -80,7 +79,7 @@ cmd命令一览：
 > 顺便提一下我的调度修改程序：[`ReimagedScheduling`](https://github.com/Yukiriri/ReimaginedScheduling)
 
 ## 关闭鼠标增强指针精度
-这是一项大幅影响鼠标手感的参数，推荐FPS选手  
+这是一套大幅影响鼠标手感的调整，推荐FPS选手  
   
 cmd命令一览：
 - 关闭增强指针精度
@@ -109,7 +108,7 @@ cmd命令一览：
 > 除非恢复默认，或者使用了新系统  
 
 ## 修改前后台调度运作
-这是一项细微影响鼠标手感的参数，推荐FPS选手  
+这是一套细微影响鼠标手感的修改，推荐FPS选手  
   
 `Win32PrioritySeparation`二进制位解释
 |          | 6~5位     | 4~3位      | 2~1位          |
@@ -147,11 +146,15 @@ cmd命令一览：
 
 ## 缓解系统动画掉帧
 NVIDIA RTX30+开始，存在低负载时系统动画掉帧  
-运行这条cmd命令可以大幅缓解掉帧  
+掉帧的原因是显存休眠过头，而唤醒显存又过慢  
+使用nvidia-smi命令限制最低显存频率可以大幅缓解掉帧  
+  
+cmd命令一览：
 ```
 nvidia-smi -lmc 800,-1
 ```
-其中，`800`表示最低显存频率不会低于`800MHZ`，因为掉帧的原因就是显存休眠过头，而唤醒显存又过慢  
+
+其中，`800`表示最低显存频率，单位为`MHZ`
 
 > [!NOTE]
 > 越高就越不会掉帧  
@@ -164,9 +167,6 @@ nvidia-smi -lmc 800,-1
 
 ## 关于AMD BIOS老生常谈的选项
 `PSS Support`、`CPPC PC`、`Global C State`现在已经没必要动了，全Auto也没问题的！！
-
-## 以上操作懒人化
-想要全自动操作上面的步骤吧，我知道，但先咕一会儿
 
 # Credits
 - https://sites.google.com/view/melodystweaks/misconceptions-about-timers-hpet-tsc-pmt
