@@ -1,5 +1,5 @@
 /bin/**
 /obj/**
-/*.bat
 /src/.idea/**
+/src/*.bat
 /src/*.sln.DotSettings.user
