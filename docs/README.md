@@ -20,10 +20,10 @@
 当然了，条件不允许就不强求了  
 
 ## 系统设置选项
-| 系统版本建议 | 硬件加速GPU计划 | 窗口化游戏优化 |
-| :----------- | :-------------- | :------------- |
-| <=23H2       | 不开            | 不开           |
-| >=24H2       | 不开白不开      | >=24H2 可以开  |
+| 系统版本 | 硬件加速GPU计划 | 窗口化游戏优化 |
+| :------- | :-------------- | :------------- |
+| <=23H2   | 不开            | 不开           |
+| >=24H2   | 不开白不开      | 可以开         |
 
 ## 驱动
 - `芯片组驱动`和`显卡驱动`需要定期更新  
@@ -37,17 +37,17 @@ RTC的CPU开销非常大，如果因此瓶颈，就会破坏游戏的Tick精准�
   
 cmd命令一览：
 - 恢复默认TSC
-    ```
-    bcdedit /DeleteValue UsePlatformClock >nul
-    ```
+  ```
+  bcdedit /DeleteValue UsePlatformClock >nul
+  ```
 - 阻止RTC
-    ```
-    bcdedit /Set UsePlatformTick No
-    ```
+  ```
+  bcdedit /Set UsePlatformTick No
+  ```
 - 禁用Tick节能
-    ```
-    bcdedit /Set DisableDynamicTick Yes
-    ```
+  ```
+  bcdedit /Set DisableDynamicTick Yes
+  ```
 
 > [!IMPORTANT]
 > 需要重启生效  
@@ -63,13 +63,13 @@ cmd命令一览：
   
 cmd命令一览：
 - 异类短运行线程调度策略
-    ```
-    powercfg -SetAcValueIndex SCHEME_CURRENT SUB_PROCESSOR "bae08b81-2d5e-4688-ad6a-13243356654b" 0
-    ```
+  ```
+  powercfg -SetAcValueIndex SCHEME_CURRENT SUB_PROCESSOR "bae08b81-2d5e-4688-ad6a-13243356654b" 0
+  ```
 - 让修改生效
-    ```
-    powercfg -SetActive SCHEME_CURRENT
-    ```
+  ```
+  powercfg -SetActive SCHEME_CURRENT
+  ```
 
 > [!NOTE]
 > 运行一次即整个电源计划生效，不需要加入开机自启  
@@ -83,25 +83,17 @@ cmd命令一览：
   
 cmd命令一览：
 - 关闭增强指针精度
-    ```
-    reg add "HKEY_CURRENT_USER\Control Panel\Mouse" /v "MouseSpeed" /t REG_SZ /d "0" /f
-    ```
-    ```
-    reg add "HKEY_CURRENT_USER\Control Panel\Mouse" /v "MouseThreshold1" /t REG_SZ /d "0" /f
-    ```
-    ```
-    reg add "HKEY_CURRENT_USER\Control Panel\Mouse" /v "MouseThreshold2" /t REG_SZ /d "0" /f
-    ```
+  ```
+  reg add "HKEY_CURRENT_USER\Control Panel\Mouse" /v "MouseSpeed" /t REG_SZ /d "0" /f
+  reg add "HKEY_CURRENT_USER\Control Panel\Mouse" /v "MouseThreshold1" /t REG_SZ /d "0" /f
+  reg add "HKEY_CURRENT_USER\Control Panel\Mouse" /v "MouseThreshold2" /t REG_SZ /d "0" /f
+  ```
 - 恢复系统默认
-    ```
-    reg add "HKEY_CURRENT_USER\Control Panel\Mouse" /v "MouseSpeed" /t REG_SZ /d "1" /f
-    ```
-    ```
-    reg add "HKEY_CURRENT_USER\Control Panel\Mouse" /v "MouseThreshold1" /t REG_SZ /d "6" /f
-    ```
-    ```
-    reg add "HKEY_CURRENT_USER\Control Panel\Mouse" /v "MouseThreshold2" /t REG_SZ /d "10" /f
-    ```
+  ```
+  reg add "HKEY_CURRENT_USER\Control Panel\Mouse" /v "MouseSpeed" /t REG_SZ /d "1" /f
+  reg add "HKEY_CURRENT_USER\Control Panel\Mouse" /v "MouseThreshold1" /t REG_SZ /d "6" /f
+  reg add "HKEY_CURRENT_USER\Control Panel\Mouse" /v "MouseThreshold2" /t REG_SZ /d "10" /f
+  ```
 
 > [!NOTE]
 > 运行一次即整个系统永久保持，不需要加入开机自启  
@@ -128,17 +120,17 @@ cmd命令一览：
 
 cmd命令一览：
 - 22
-    ```
-    reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\PriorityControl" /v "Win32PrioritySeparation" /t REG_DWORD /d 16 /f
-    ```
+  ```
+  reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\PriorityControl" /v "Win32PrioritySeparation" /t REG_DWORD /d 16 /f
+  ```
 - 42
-    ```
-    reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\PriorityControl" /v "Win32PrioritySeparation" /t REG_DWORD /d 2a /f
-    ```
+  ```
+  reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\PriorityControl" /v "Win32PrioritySeparation" /t REG_DWORD /d 2a /f
+  ```
 - 恢复系统默认
-    ```
-    reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\PriorityControl" /v "Win32PrioritySeparation" /t REG_DWORD /d 2 /f
-    ```
+  ```
+  reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\PriorityControl" /v "Win32PrioritySeparation" /t REG_DWORD /d 2 /f
+  ```
 
 > [!NOTE]
 > 运行一次即整个系统永久保持，不需要加入开机自启  
